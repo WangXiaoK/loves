@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!--设置为StudentDao接口方法提供sql语句配置-->
+<mapper namespace="com.ssm.dao">
+
+    <!--更新学生-->
+    <update id="com.ssm.dao.StudentDao.updateStudent" parameterType="com.ssm.model.Student">
+        UPDATE student
+            SET student.name = #{name},
+                student.sex = #{sex},
+                student.age = #{age}
+         WHERE student.name = #{name}
+    </update>
+    <!--查询所有学生-->
+    <select id="com.ssm.dao.StudentDao.selectAllStudent" resultType="com.ssm.model.Student">
+        SELECT id,name,sex,age FROM STUDENT
+    </select>
+    <!--通过id查找指定学生-->
+    <select id="com.ssm.dao.StudentDao.selectStudent" resultType="com.ssm.model.Student" parameterType= "Integer">
+      SELECT * FROM STUDENT WHERE ID = #{id}
+    </select>
+    <!--通过姓名查找学生-->
+    <select id="com.ssm.dao.StudentDao.selectStudentByName" resultType="com.ssm.model.Student" parameterType="String">
+      SELECT * FROM STUDENT WHERE NAME = #{studentName}
+    </select>
+    <!--插入新学生-->
+    <insert id="com.ssm.dao.StudentDao.insertStudent" parameterType="com.ssm.model.Student" useGeneratedKeys="true" keyProperty="id">
+      INSERT INTO STUDENT(name,sex,age) VALUES(#{name},#{sex},#{age})
+    </insert>
+    <!--通过学生姓名删除学生-->
+    <delete id="com.ssm.dao.StudentDao.deleteStudentByName" parameterType="String">
+        DELETE FROM STUDENT WHERE NAME = #{name}
+    </delete>
+
+</mapper>
